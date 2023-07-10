@@ -17,9 +17,5 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "baseUrl": "src"
   },
-  "include": ["src"],
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  }
+  "include": ["src"]
 }
