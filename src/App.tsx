@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import WorkoutListComponent from './component/workoutList/WorkoutListComponent';
 import React, { createContext, useState } from 'react';
@@ -63,7 +62,7 @@ function App() {
           <header className='App-header'>
             <Routes>
               <Route
-                path='/'
+                path={process.env.PUBLIC_URL + '/'}
                 element={
                   <>
                     <WorkoutListComponent onSelect={handleSelect} />
@@ -76,14 +75,17 @@ function App() {
                       />
                     ))}
                     {selectedWorkouts.length > 0 && (
-                      <Link to='/results'>
+                      <Link to={process.env.PUBLIC_URL + '/results'}>
                         <button>운동완료</button>
                       </Link>
                     )}
                   </>
                 }
               ></Route>
-              <Route path='/results' element={<ResultComponent />} />
+              <Route
+                path={process.env.PUBLIC_URL + '/results'}
+                element={<ResultComponent />}
+              />
             </Routes>
           </header>
         </div>
