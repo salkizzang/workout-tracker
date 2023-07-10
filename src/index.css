@@ -11,3 +11,89 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* .writeWorkoutContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+/* WriteWorkoutComponent.css */
+/* WriteWorkoutComponent.css */
+
+.writeWorkoutContainer {
+  display: flex;
+  flex-wrap: wrap; /* 텍스트 줄바꿈 설정 */
+  align-items: center;
+  gap: 0.5rem; /* 간격 조정 */
+  background-color: #f7f7f7;
+  padding: 0.5rem; /* 패딩 조정 */
+  margin: 0.5rem 0; /* 마진 조정 */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* 최대 너비 설정 */
+  width: 500px;
+}
+
+.writeWorkoutContainer label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: #333;
+  font-size: 0.7rem; /* 글씨 크기 조정 */
+}
+
+.writeWorkoutContainer label span {
+  margin-bottom: 0.3rem; /* 마진 조정 */
+}
+
+.writeWorkoutContainer input {
+  padding: 0.3rem; /* 패딩 조정 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.7rem; /* 글씨 크기 조정 */
+  flex: 1;
+  width: 50px; /* 너비 조정 */
+}
+
+.writeWorkoutContainer button {
+  padding: 0.3rem; /* 패딩 조정 */
+  border: none;
+  border-radius: 5px;
+  background-color: #ff6347;
+  color: white;
+  cursor: pointer;
+  font-size: 0.7rem; /* 글씨 크기 조정 */
+}
+
+.writeWorkoutContainer button:hover {
+  background-color: #ff4500;
+}
+
+.mainWorkoutList,
+.subWorkoutList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.mainWorkoutList li,
+.subWorkoutList li {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.result {
+  width: 300px; /* div의 너비를 설정합니다. */
+  margin: 10px; /* 주변의 공간을 설정합니다. */
+}
+
+.result p {
+  font-size: 14px; /* 글자 크기를 설정합니다. */
+  line-height: 1.5; /* 줄 간격을 설정합니다. */
+}
