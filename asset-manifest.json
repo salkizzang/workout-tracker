@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.ca4430a5.css",
-    "main.js": "/static/js/main.9a6f583b.js",
-    "index.html": "/index.html",
-    "main.ca4430a5.css.map": "/static/css/main.ca4430a5.css.map",
-    "main.9a6f583b.js.map": "/static/js/main.9a6f583b.js.map"
+    "main.css": "/workout-tracker/static/css/main.ca4430a5.css",
+    "main.js": "/workout-tracker/static/js/main.9a6f583b.js",
+    "index.html": "/workout-tracker/index.html",
+    "main.ca4430a5.css.map": "/workout-tracker/static/css/main.ca4430a5.css.map",
+    "main.9a6f583b.js.map": "/workout-tracker/static/js/main.9a6f583b.js.map"
   },
   "entrypoints": [
     "static/css/main.ca4430a5.css",
