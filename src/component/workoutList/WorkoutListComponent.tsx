@@ -25,15 +25,22 @@ const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
   // 현재 선택된 대표 운동 종목을 추적하는 state
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
+  // 대표 운동 종목 리스트와 하위 운동 목록 중 어떤 것이 보여질지 추적하는 state
+  const [isMainVisible, setIsMainVisible] = useState<boolean>(true);
+
   // 대표 운동 종목을 선택하는 함수
   const selectType = (type: string) => {
     setSelectedType(type);
+    setIsMainVisible(false);
+  };
+
+  const goBack = () => {
+    setIsMainVisible(true);
   };
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        {/* 대표 운동 종목 리스트 */}
+      {isMainVisible ? (
         <ul className='mainWorkoutList'>
           {main.map((type) => (
             <li key={type} onClick={() => selectType(type)}>
@@ -41,9 +48,11 @@ const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
             </li>
           ))}
         </ul>
-
-        {/* 선택된 대표 운동 종목의 하위 운동 목록 */}
-        {selectedType && (
+      ) : (
+        <div>
+          <button className='goBackButton' onClick={goBack}>
+            <span>←</span>
+          </button>
           <ul className='subWorkoutList'>
             {sub
               .filter((item) => item.type === selectedType)
@@ -63,8 +72,8 @@ const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
                 </li>
               ))}
           </ul>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

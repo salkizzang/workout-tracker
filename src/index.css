@@ -113,3 +113,23 @@ code {
   margin-left: 5px;
   margin-right: 5px;
 }
+.goBackButton {
+  display: flex;
+  align-items: center;
+  border: 1px solid #333;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px; /* 버튼에 둥근 모서리를 추가합니다. */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); /* 버튼에 약간의 그림자를 추가하여 입체감을 줍니다. */
+  color: #333;
+  text-decoration: none; /* 텍스트에 밑줄 제거 */
+  transition: all 0.3s ease; /* 클릭 시 버튼에 애니메이션 효과를 추가합니다. */
+}
+
+.goBackButton:hover {
+  background-color: #f6f6f6;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}

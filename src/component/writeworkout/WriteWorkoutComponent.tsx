@@ -32,11 +32,16 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
     }
   };
 
+  //세트 추가 버튼이 있는게 나을지도??
+
   return (
     <div>
       {workout && (
         <div className='writeWorkoutContainer'>
-          <label>{workout.name}</label>
+          <div className='flex-row'>
+            <label>{workout.name}</label>
+            {/* <button>세트 추가</button> */}
+          </div>
           <div className='flex-row'>
             <label>Weight:</label>
             <button onClick={decrementWeight}>-</button>

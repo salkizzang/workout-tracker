@@ -5,7 +5,10 @@ interface Workout {
   reps: number;
   weight: number;
 }
-
+interface setWorkout {
+  reps: number;
+  weight: number;
+}
 interface WorkoutListProps {
   onSelect: (workout: Workout) => void;
 }
