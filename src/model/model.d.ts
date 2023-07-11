@@ -2,10 +2,11 @@ interface Workout {
   id: string;
   type: string;
   name: string;
-  reps: number;
-  weight: number;
+  // reps: number;
+  // weight: number;
+  sets: workoutInfo[];
 }
-interface setWorkout {
+interface workoutInfo {
   reps: number;
   weight: number;
 }
@@ -20,7 +21,8 @@ interface WriteWorkoutProps {
     id: string,
     type: string,
     name: string,
-    weight: number,
-    reps: number
+    // weight: number,
+    // reps: number
+    sets: workoutInfo[]
   ) => void;
 }

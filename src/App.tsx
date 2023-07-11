@@ -6,28 +6,56 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import ResultComponent from './component/result/ResultComponent';
 
 export const WorkoutDataContext = createContext<
-  Record<string, { type: string; name: string; weight: number; reps: number }>
+  Record<string, { type: string; name: string; sets: workoutInfo[] }>
 >({});
 
 function App() {
   const [selectedWorkouts, setSelectedWorkouts] = useState<Workout[]>([]);
   const [workoutData, setWorkoutData] = useState<
-    Record<string, { type: string; name: string; weight: number; reps: number }>
+    Record<string, { type: string; name: string; sets: workoutInfo[] }>
   >({});
 
   const handleSelect = (workout: Workout) => {
-    let lastWeight = 0;
-    let lastReps = 0;
-    Object.values(workoutData).forEach((data) => {
-      if (data.type === workout.type && data.name === workout.name) {
-        lastWeight = data.weight;
-        lastReps = data.reps;
+    // 이미 선택된 운동 중에서 같은 이름과 타입을 가진 운동이 있는지 확인
+    const existingWorkout = selectedWorkouts.find(
+      (w) => w.type === workout.type && w.name === workout.name
+    );
+
+    // 같은 이름과 타입을 가진 운동이 이미 선택된 운동 중에 없는 경우
+    if (!existingWorkout) {
+      let sets: workoutInfo[] = [];
+      let dataExists = false;
+
+      // 기존에 저장된 운동 데이터를 확인
+      Object.values(workoutData).forEach((data) => {
+        if (data.type === workout.type && data.name === workout.name) {
+          let setsArr = data.sets;
+          dataExists = true;
+
+          // 기존에 저장된 운동 데이터가 있는 경우, 그 데이터를 복사
+          if (setsArr.length > 0) {
+            sets = [
+              ...setsArr,
+              {
+                weight: setsArr[setsArr.length - 1].weight,
+                reps: setsArr[setsArr.length - 1].reps,
+              },
+            ];
+          }
+          // 기존에 저장된 운동 데이터가 없는 경우, 초기값 설정
+          else {
+            sets = [{ weight: 0, reps: 0 }];
+          }
+        }
+      });
+
+      // 선택된 운동 목록에 새 운동을 추가
+      if (!dataExists) {
+        sets = [{ weight: 0, reps: 0 }];
       }
-    });
-    setSelectedWorkouts([
-      ...selectedWorkouts,
-      { ...workout, weight: lastWeight, reps: lastReps },
-    ]);
+
+      setSelectedWorkouts([...selectedWorkouts, { ...workout, sets: sets }]);
+    }
   };
 
   const handleRemove = (id: string) => {
@@ -46,12 +74,13 @@ function App() {
     id: string,
     type: string,
     name: string,
-    weight: number,
-    reps: number
+    // weight: number,
+    // reps: number
+    sets: workoutInfo[]
   ) => {
     setWorkoutData({
       ...workoutData,
-      [id]: { type, name, weight, reps },
+      [id]: { type, name, sets },
     });
   };
 

@@ -5,34 +5,49 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
   onRemove,
   onDataChange,
 }) => {
-  const [weight, setWeight] = useState(workout.weight);
-  const [reps, setReps] = useState(workout.reps);
+  const [sets, setSets] = useState<workoutInfo[]>(workout.sets || []);
 
   useEffect(() => {
-    onDataChange(workout.id, workout.type, workout.name, weight, reps);
-  }, [weight, reps]);
+    onDataChange(workout.id, workout.type, workout.name, sets);
+  }, [sets]);
 
-  const incrementWeight = () => {
-    setWeight(weight + 5);
+  const incrementWeight = (index: number) => {
+    const newSets = [...sets];
+    newSets[index].weight += 5;
+    setSets(newSets);
   };
 
-  const decrementWeight = () => {
-    if (weight > 0) {
-      setWeight(weight - 5);
+  const decrementWeight = (index: number) => {
+    const newSets = [...sets];
+    if (newSets[index].weight > 0) {
+      newSets[index].weight -= 5;
     }
+    setSets(newSets);
   };
 
-  const incrementReps = () => {
-    setReps(reps + 1);
+  const incrementReps = (index: number) => {
+    const newSets = [...sets];
+    newSets[index].reps += 1;
+    setSets(newSets);
   };
 
-  const decrementRpes = () => {
-    if (reps > 0) {
-      setReps(reps - 1);
+  const decrementReps = (index: number) => {
+    const newSets = [...sets];
+    if (newSets[index].reps > 0) {
+      newSets[index].reps -= 1;
     }
+    setSets(newSets);
   };
 
-  //세트 추가 버튼이 있는게 나을지도??
+  const addSet = () => {
+    const lastSet =
+      sets.length > 0 ? sets[sets.length - 1] : { weight: 0, reps: 0 };
+    setSets([...sets, { ...lastSet }]);
+  };
+
+  const removeSet = (index: number) => {
+    setSets(sets.filter((_, setIndex) => setIndex !== index));
+  };
 
   return (
     <div>
@@ -40,31 +55,49 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
         <div className='writeWorkoutContainer'>
           <div className='flex-row'>
             <label>{workout.name}</label>
-            {/* <button>세트 추가</button> */}
+            <button onClick={addSet}>세트 추가</button>
           </div>
-          <div className='flex-row'>
-            <label>Weight:</label>
-            <button onClick={decrementWeight}>-</button>
-            <input
-              type='number'
-              value={weight}
-              onChange={(e) => setWeight(parseInt(e.target.value))}
-            />
-            <button onClick={incrementWeight}>+</button>
-            <label>Reps:</label>
-            <button onClick={decrementRpes}>-</button>
-            <input
-              type='number'
-              value={reps}
-              onChange={(e) => setReps(parseInt(e.target.value))}
-            />
-            <button onClick={incrementReps}>+</button>
-
-            <button onClick={() => onRemove(workout.id)}>Remove</button>
-          </div>
+          {sets.map((set, index) => (
+            <div key={index} className='flex-row'>
+              <label>Set {index + 1}:</label>
+              <label>Weight:</label>
+              <button onClick={() => decrementWeight(index)}>-</button>
+              <input
+                type='number'
+                value={set.weight}
+                onChange={(e) =>
+                  setSets(
+                    sets.map((s, i) =>
+                      i === index
+                        ? { ...s, weight: parseInt(e.target.value) }
+                        : s
+                    )
+                  )
+                }
+              />
+              <button onClick={() => incrementWeight(index)}>+</button>
+              <label>Reps:</label>
+              <button onClick={() => decrementReps(index)}>-</button>
+              <input
+                type='number'
+                value={set.reps}
+                onChange={(e) =>
+                  setSets(
+                    sets.map((s, i) =>
+                      i === index ? { ...s, reps: parseInt(e.target.value) } : s
+                    )
+                  )
+                }
+              />
+              <button onClick={() => incrementReps(index)}>+</button>
+              <button onClick={() => removeSet(index)}>X</button>
+            </div>
+          ))}
+          <button onClick={() => onRemove(workout.id)}>Remove</button>
         </div>
       )}
     </div>
   );
 };
+
 export default WriteWorkoutComponent;

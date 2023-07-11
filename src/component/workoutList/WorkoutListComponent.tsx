@@ -63,8 +63,7 @@ const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
                     onSelect({
                       ...item,
                       id: uuidv4(),
-                      weight: 0,
-                      reps: 0,
+                      sets: [{ weight: 0, reps: 0 }],
                     })
                   }
                 >
