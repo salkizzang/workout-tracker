@@ -37,23 +37,26 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
       {workout && (
         <div className='writeWorkoutContainer'>
           <label>{workout.name}</label>
-          <label>Weight:</label>
-          <button onClick={decrementWeight}>-</button>
-          <input
-            type='number'
-            value={weight}
-            onChange={(e) => setWeight(parseInt(e.target.value))}
-          />
-          <button onClick={incrementWeight}>+</button>
-          <label>Reps:</label>
-          <button onClick={decrementRpes}>-</button>
-          <input
-            type='number'
-            value={reps}
-            onChange={(e) => setReps(parseInt(e.target.value))}
-          />
-          <button onClick={incrementReps}>+</button>
-          <button onClick={() => onRemove(workout.id)}>Remove</button>
+          <div className='flex-row'>
+            <label>Weight:</label>
+            <button onClick={decrementWeight}>-</button>
+            <input
+              type='number'
+              value={weight}
+              onChange={(e) => setWeight(parseInt(e.target.value))}
+            />
+            <button onClick={incrementWeight}>+</button>
+            <label>Reps:</label>
+            <button onClick={decrementRpes}>-</button>
+            <input
+              type='number'
+              value={reps}
+              onChange={(e) => setReps(parseInt(e.target.value))}
+            />
+            <button onClick={incrementReps}>+</button>
+
+            <button onClick={() => onRemove(workout.id)}>Remove</button>
+          </div>
         </div>
       )}
     </div>

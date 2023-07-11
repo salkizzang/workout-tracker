@@ -11,18 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-/* .writeWorkoutContainer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: #f7f7f7;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
-/* WriteWorkoutComponent.css */
-/* WriteWorkoutComponent.css */
+
+/* ...기존 CSS 코드... */
+
+@media screen and (max-width: 768px) {
+  .writeWorkoutContainer {
+    width: 90%; /* 화면 너비에 따라 컨테이너 너비 조정 */
+    flex-direction: column; /* 화면이 작아지면 아이템들을 세로로 배열 */
+  }
+
+  .writeWorkoutContainer input {
+    width: 100%; /* 화면이 작아지면 input 너비를 최대로 확장 */
+  }
+
+  .result {
+    width: 90%; /* 화면 너비에 따라 div 너비 조정 */
+  }
+}
 
 .writeWorkoutContainer {
   display: flex;
@@ -96,4 +101,15 @@ code {
 .result p {
   font-size: 14px; /* 글자 크기를 설정합니다. */
   line-height: 1.5; /* 줄 간격을 설정합니다. */
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-row > * {
+  margin-left: 5px;
+  margin-right: 5px;
 }
