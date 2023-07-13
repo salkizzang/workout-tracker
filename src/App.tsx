@@ -1,15 +1,68 @@
 import './App.css';
 import WorkoutListComponent from './component/workoutList/WorkoutListComponent';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import WriteWorkoutComponent from './component/writeworkout/WriteWorkoutComponent';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import ResultComponent from './component/result/ResultComponent';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  getDocs,
+} from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 export const WorkoutDataContext = createContext<
   Record<string, { type: string; name: string; sets: workoutInfo[] }>
 >({});
 
+const firebaseConfig = {
+  apiKey: 'AIzaSyCxQVWU6W14zIDnuyeUqYib4wXWTW2WIvU',
+  authDomain: 'workout-tracker-70dd6.firebaseapp.com',
+  projectId: 'workout-tracker-70dd6',
+  storageBucket: 'workout-tracker-70dd6.appspot.com',
+  messagingSenderId: '960715236833',
+  appId: '1:960715236833:web:eb89b0400a2d3ceca61ea0',
+  measurementId: 'G-RLD80CHRZC',
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+
 function App() {
+  const getExercises = async () => {
+    const exercisesCol = collection(db, 'exercises');
+    const exerciseSnapshot = await getDocs(exercisesCol);
+    const exerciseList = exerciseSnapshot.docs.map((doc) => doc.data());
+    console.log(exerciseList);
+  };
+  useEffect(() => {
+    getExercises();
+    // const initUser = async () => {
+    //   let userId = localStorage.getItem('userId');
+    //   if (!userId) {
+    //     userId = uuidv4();
+    //     localStorage.setItem('userId', userId);
+    //   }
+    //   const userDocRef = doc(db, 'users', userId);
+    //   const userDocSnap = await getDoc(userDocRef);
+    //   if (!userDocSnap.exists()) {
+    //     // create default exercise list if user document does not exist
+    //     await setDoc(userDocRef, {
+    //       exerciseList: [
+    //         // your default exercise list goes here
+    //       ],
+    //     });
+    //   }
+    // };
+    // initUser();
+  }, []);
+
   const [selectedWorkouts, setSelectedWorkouts] = useState<Workout[]>([]);
   const [workoutData, setWorkoutData] = useState<
     Record<string, { type: string; name: string; sets: workoutInfo[] }>
