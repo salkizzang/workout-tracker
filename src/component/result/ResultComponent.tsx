@@ -47,7 +47,7 @@
 
 // export default ResultComponent;
 import React, { useContext } from 'react';
-import { WorkoutDataContext } from 'App';
+import { WorkoutDataContext } from '../../App';
 
 const ResultComponent: React.FC = () => {
   const workoutData = useContext(WorkoutDataContext);
