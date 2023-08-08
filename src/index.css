@@ -12,69 +12,6 @@ code {
     monospace;
 }
 
-@media screen and (max-width: 768px) {
-  .writeWorkoutContainer {
-    width: 90%; /* 화면 너비에 따라 컨테이너 너비 조정 */
-    flex-direction: column; /* 화면이 작아지면 아이템들을 세로로 배열 */
-  }
-
-  .writeWorkoutContainer input {
-    width: 100%; /* 화면이 작아지면 input 너비를 최대로 확장 */
-  }
-
-  .result {
-    width: 90%; /* 화면 너비에 따라 div 너비 조정 */
-  }
-}
-
-.writeWorkoutContainer {
-  /* display: flex; */
-  flex-wrap: wrap; /* 텍스트 줄바꿈 설정 */
-  /* align-items: center; */
-  gap: 0.5rem; /* 간격 조정 */
-  background-color: #f7f7f7;
-  padding: 0.5rem; /* 패딩 조정 */
-  margin: 0.5rem 0; /* 마진 조정 */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%; /* 최대 너비 설정 */
-  /* width: 300px; */
-}
-
-.writeWorkoutContainer label {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  color: #333;
-  font-size: 0.7rem; /* 글씨 크기 조정 */
-}
-
-.writeWorkoutContainer label span {
-  margin-bottom: 0.3rem; /* 마진 조정 */
-}
-
-.writeWorkoutContainer input {
-  padding: 0.3rem; /* 패딩 조정 */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 0.7rem; /* 글씨 크기 조정 */
-  flex: 1;
-  width: 50px; /* 너비 조정 */
-}
-
-.writeWorkoutContainer button {
-  padding: 0.3rem; /* 패딩 조정 */
-  border: none;
-  border-radius: 5px;
-  background-color: #ff6347;
-  color: white;
-  cursor: pointer;
-  font-size: 0.7rem; /* 글씨 크기 조정 */
-}
-
-.writeWorkoutContainer button:hover {
-  background-color: #ff4500;
-}
 
 .mainWorkoutList,
 .subWorkoutList {
@@ -91,6 +28,17 @@ code {
   margin: 1rem;
 }
 
+.newBtn{
+  cursor: pointer;
+  font-size: small;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 1rem;
+  color : red;
+  padding : 0.3rem;
+}
+
+
 .result {
   width: 300px; /* div의 너비를 설정합니다. */
   margin: 10px; /* 주변의 공간을 설정합니다. */
@@ -101,16 +49,11 @@ code {
   line-height: 1.5; /* 줄 간격을 설정합니다. */
 }
 
-.flex-row {
+.buttonGroup {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 5px;
 }
 
-.flex-row > * {
-  margin-left: 5px;
-  margin-right: 5px;
-}
 .goBackButton {
   display: flex;
   align-items: center;
@@ -130,4 +73,65 @@ code {
 .goBackButton:hover {
   background-color: #f6f6f6;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* App.css */
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.leftContainer {
+  width: 50%;
+}
+
+.rightContainer {
+  width: 50%;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .leftContainer,
+  .rightContainer {
+    width: 50%;
+  }
+}
+
+#nav2>a {
+  display: block; /* a태그는 글자성격 = inline */
+  float: left;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 80px;
+  padding: 0 30px;
+}
+#nav2>ul {
+  float: right;
+}
+#nav2>ul li {
+  float: left;
+  padding: 0 30px;
+  line-height: 80px;
+}
+
+
+.workout-card {
+  margin: 30px auto;
+  /* height: 740px; */
+  /* width: 450px; */
+  /* background: #fff; */
+  border: 1px solid #ddd;
+  background-color: #282c34;
+  box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  height:auto;
 }

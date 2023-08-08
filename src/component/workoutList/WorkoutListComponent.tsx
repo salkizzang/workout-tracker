@@ -2,6 +2,7 @@ import { collection, getDocs } from '@firebase/firestore';
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import {db} from '../../App';
+import NavigationComponent from '../navigation/NavigationComponent';
 
 const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
   const main = ['가슴', '등', '어깨', '하체', '팔', '복근', '기타'];
@@ -64,21 +65,19 @@ const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
 
   return (
     <>
-      {isMainVisible ? (
-        <ul className='mainWorkoutList'>
+      <NavigationComponent/>
+      <div className='container'>
+        <div className='leftContainer'>
+          <ul className='mainWorkoutList'>
           {main.map((type) => (
             <li key={type} onClick={() => selectType(type)}>
               {type}
             </li>
           ))}
-        </ul>
-      ) : (
-        <div>
-          <button className='goBackButton' onClick={goBack}>
-            <span>←</span>
-          </button>
+        </ul></div>
+        <div className='rightContainer'>
           <ul className='subWorkoutList'>
-            {subExercises
+            {subExercises.length==0 ? <p>운동항목이 비어있습니다.</p>: subExercises
               .map((item, index) => (
                 <li
                   key={index}
@@ -91,11 +90,10 @@ const WorkoutListComponent: React.FC<WorkoutListProps> = ({ onSelect }) => {
                   }
                 >
                   {item.name}
-                </li>
-              ))}
+                </li>))}
           </ul>
         </div>
-      )}
+        </div>
     </>
   );
 };

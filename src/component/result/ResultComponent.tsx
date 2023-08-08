@@ -1,58 +1,13 @@
-// import React, { useContext } from 'react';
-// import { WorkoutDataContext } from 'App';
-
-// type WorkoutData = {
-//   type: string;
-//   name: string;
-//   weight: number;
-//   reps: number;
-// };
-
-// const ResultComponent: React.FC = () => {
-//   const workoutData: Record<string, WorkoutData> =
-//     useContext(WorkoutDataContext);
-
-//   // 키별로 데이터를 정렬하고, 같은 타입의 운동을 그룹화합니다.
-//   const groupedWorkouts: Record<string, WorkoutData[]> = {};
-
-//   for (const key in workoutData) {
-//     const workout = workoutData[key];
-//     if (groupedWorkouts[workout.type]) {
-//       groupedWorkouts[workout.type].push(workout);
-//     } else {
-//       groupedWorkouts[workout.type] = [workout];
-//     }
-//   }
-
-//   const workoutGroups = Object.entries(groupedWorkouts).map(
-//     ([type, workouts]) => {
-//       // 각 그룹 내에서 이름(name)으로 운동을 정렬합니다.
-//       workouts.sort((a, b) => a.name.localeCompare(b.name));
-
-//       return (
-//         <div className='result' key={type}>
-//           <h2>{type}</h2>
-//           {workouts.map((workout, index) => (
-//             <p key={index}>
-//               {workout.name} - Weight: {workout.weight}, Reps: {workout.reps}
-//             </p>
-//           ))}
-//         </div>
-//       );
-//     }
-//   );
-
-//   return <div></div>;
-// };
-
-// export default ResultComponent;
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { WorkoutDataContext } from '../../App';
+import NavigationComponent from '../navigation/NavigationComponent';
 
 const ResultComponent: React.FC = () => {
-  const workoutData = useContext(WorkoutDataContext);
+  const {workoutData} = useContext(WorkoutDataContext);
+  const [showNavigation, setShowNavigation] = useState(true);
+  let navigationRendered = false; // Track whether NavigationComponent is rendered
 
-  // 운동 유형별로 데이터를 그룹화합니다.
+  // 운동 유형별로 데이터를 그룹화
   const groupedWorkouts: Record<string, Record<string, workoutInfo[]>> = {};
 
   for (const key in workoutData) {
@@ -78,7 +33,10 @@ const ResultComponent: React.FC = () => {
       const workoutNames = Object.keys(workouts).sort();
 
       return (
-        <div className='result' key={type}>
+        <>
+        
+        <div className='container' key={type}>
+          <div style={{width:'100%'}}>
           <h2>{type}</h2>
           {workoutNames.map((name) => {
             const sets = workouts[name];
@@ -94,12 +52,14 @@ const ResultComponent: React.FC = () => {
               </div>
             );
           })}
+          </div>
         </div>
+        </>
       );
     }
   );
 
-  return <div>{workoutGroups}</div>;
+  return <div><NavigationComponent/>{workoutGroups}</div>;
 };
 
 export default ResultComponent;

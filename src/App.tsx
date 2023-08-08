@@ -19,9 +19,27 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import ModifyListComponent from './component/modifyList/ModifyListComponent';
 
-export const WorkoutDataContext = createContext<
-  Record<string, { type: string; name: string; sets: workoutInfo[] }>
->({});
+export type WorkoutData = Record<string, { type: string; name: string; sets: workoutInfo[] }>;
+
+interface IWorkoutDataContext {
+  workoutData: WorkoutData;
+  setWorkoutData: React.Dispatch<React.SetStateAction<WorkoutData>>;
+}
+
+export const WorkoutDataContext = createContext<IWorkoutDataContext>({
+  workoutData: {},
+  setWorkoutData: () => {},
+});
+
+interface ISelectedWorkoutsContext {
+  setSelectedWorkouts: React.Dispatch<React.SetStateAction<Workout[]>>;
+}
+
+export const SelectedWorkoutsContext = createContext<ISelectedWorkoutsContext>({
+  setSelectedWorkouts: () => {},
+});
+
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCxQVWU6W14zIDnuyeUqYib4wXWTW2WIvU',
@@ -114,41 +132,70 @@ function App() {
       (w) => w.type === workout.type && w.name === workout.name
     );
 
+    // // 같은 이름과 타입을 가진 운동이 이미 선택된 운동 중에 없는 경우
+    // if (!existingWorkout) {
+    //   let sets: workoutInfo[] = [];
+    //   let dataExists = false;
+
+    //   // 기존에 저장된 운동 데이터를 확인
+    //   Object.values(workoutData).forEach((data) => {
+    //     if (data.type === workout.type && data.name === workout.name) {
+    //       let setsArr = data.sets;
+    //       dataExists = true;
+
+    //       // 기존에 저장된 운동 데이터가 있는 경우, 그 데이터를 복사
+    //       if (setsArr.length > 0) {
+    //         sets = [
+    //           ...setsArr,
+    //           {
+    //             weight: setsArr[setsArr.length - 1].weight,
+    //             reps: setsArr[setsArr.length - 1].reps,
+    //           },
+    //         ];
+    //       }
+    //       // 기존에 저장된 운동 데이터가 없는 경우, 초기값 설정
+    //       else {
+    //         sets = [{ weight: 0, reps: 0 }];
+    //       }
+    //     }
+    //   });
+
+    //   // 선택된 운동 목록에 새 운동을 추가
+    //   if (!dataExists) {
+    //     sets = [{ weight: 0, reps: 0 }];
+    //   }
+
+    //   // setSelectedWorkouts([...selectedWorkouts, { ...workout, sets: sets }]);
+    //   setSelectedWorkouts(prevWorkouts => [...prevWorkouts, { ...workout, sets: sets }]);
+    // }
     // 같은 이름과 타입을 가진 운동이 이미 선택된 운동 중에 없는 경우
-    if (!existingWorkout) {
-      let sets: workoutInfo[] = [];
-      let dataExists = false;
+  if (!existingWorkout) {
+    // 기존에 저장된 운동 데이터를 확인
+    const existingData = workoutData[workout.id];
 
-      // 기존에 저장된 운동 데이터를 확인
-      Object.values(workoutData).forEach((data) => {
-        if (data.type === workout.type && data.name === workout.name) {
-          let setsArr = data.sets;
-          dataExists = true;
+    let sets: workoutInfo[] = [];
 
-          // 기존에 저장된 운동 데이터가 있는 경우, 그 데이터를 복사
-          if (setsArr.length > 0) {
-            sets = [
-              ...setsArr,
-              {
-                weight: setsArr[setsArr.length - 1].weight,
-                reps: setsArr[setsArr.length - 1].reps,
-              },
-            ];
-          }
-          // 기존에 저장된 운동 데이터가 없는 경우, 초기값 설정
-          else {
-            sets = [{ weight: 0, reps: 0 }];
-          }
-        }
-      });
-
-      // 선택된 운동 목록에 새 운동을 추가
-      if (!dataExists) {
-        sets = [{ weight: 0, reps: 0 }];
-      }
-
-      setSelectedWorkouts([...selectedWorkouts, { ...workout, sets: sets }]);
+    if (existingData) {
+      // 기존에 저장된 운동 데이터가 있는 경우, 해당 데이터의 sets를 복사
+      sets = existingData.sets.map((set) => ({ ...set }));
+    } else {
+      // 기존에 저장된 운동 데이터가 없는 경우, 초기값 설정
+      sets = [{ weight: 0, reps: 0 }];
     }
+
+    setWorkoutData((prevData) => ({
+      ...prevData,
+      [workout.id]: { type: workout.type, name: workout.name, sets: sets },
+    }));
+    console.log(sets);
+    
+    // 선택된 운동 목록에 새 운동을 추가
+    setSelectedWorkouts((prevWorkouts) => [
+      ...prevWorkouts,
+      { ...workout, sets: sets },
+    ]);
+   
+  }
   };
 
   const handleRemove = (id: string) => {
@@ -167,19 +214,32 @@ function App() {
     id: string,
     type: string,
     name: string,
-    // weight: number,
-    // reps: number
-    sets: workoutInfo[]
+    updatedSets: workoutInfo[]
   ) => {
-    setWorkoutData({
-      ...workoutData,
-      [id]: { type, name, sets },
-    });
+
+
+    setWorkoutData((prevState) => {
+      return {
+          ...prevState,
+          [id]: {
+              ...prevState[id], 
+              type,
+              name,
+              sets: [...updatedSets], // sets 배열을 새로운 배열로 복사
+          },
+      };
+  });
   };
 
+  const saveWorkouts = () => {
+    console.log(selectedWorkouts);
+  }
+
   return (
+      <WorkoutDataContext.Provider value={{ workoutData, setWorkoutData }}>
+      <SelectedWorkoutsContext.Provider value={{ setSelectedWorkouts }}>
     <Router>
-      <WorkoutDataContext.Provider value={workoutData}>
+        
         <div className='App'>
           <header className='App-header'>
             <Routes>
@@ -211,7 +271,7 @@ function App() {
                     ))}
                     {selectedWorkouts.length > 0 && (
                       <Link to={process.env.PUBLIC_URL + '/results'}>
-                        <button>운동완료</button>
+                        <button onClick={saveWorkouts}>운동완료</button>
                       </Link>
                     )}
                   </>
@@ -228,8 +288,10 @@ function App() {
             </Routes>
           </header>
         </div>
-      </WorkoutDataContext.Provider>
     </Router>
+
+      </SelectedWorkoutsContext.Provider>
+      </WorkoutDataContext.Provider>
   );
 }
 
