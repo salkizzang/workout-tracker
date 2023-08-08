@@ -229,6 +229,15 @@ function App() {
           },
       };
   });
+  setSelectedWorkouts((prevWorkouts) => {
+    const updatedWorkouts = prevWorkouts.map((workout) => {
+      if (workout.id === id) {
+        return { ...workout, sets: updatedSets };
+      }
+      return workout;
+    });
+    return updatedWorkouts;
+  });
   };
 
   const saveWorkouts = () => {
