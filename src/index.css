@@ -12,7 +12,6 @@ code {
     monospace;
 }
 
-
 .mainWorkoutList,
 .subWorkoutList {
   list-style: none;
@@ -28,16 +27,15 @@ code {
   margin: 1rem;
 }
 
-.newBtn{
+.newBtn {
   cursor: pointer;
   font-size: small;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 1rem;
-  color : red;
-  padding : 0.3rem;
+  color: red;
+  padding: 0.3rem;
 }
-
 
 .result {
   width: 300px; /* div의 너비를 설정합니다. */
@@ -75,8 +73,6 @@ code {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-
-
 /* App.css */
 .container {
   display: flex;
@@ -106,7 +102,7 @@ code {
   }
 }
 
-#nav2>a {
+#nav2 > a {
   display: block; /* a태그는 글자성격 = inline */
   float: left;
   font-size: 30px;
@@ -114,15 +110,14 @@ code {
   line-height: 80px;
   padding: 0 30px;
 }
-#nav2>ul {
+#nav2 > ul {
   float: right;
 }
-#nav2>ul li {
+#nav2 > ul li {
   float: left;
   padding: 0 30px;
   line-height: 80px;
 }
-
 
 .workout-card {
   margin: 30px auto;
@@ -133,5 +128,181 @@ code {
   background-color: #282c34;
   box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  height:auto;
+  height: auto;
+}
+
+.btn-gradient {
+  align-self: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px 30px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.21);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-gradient-small {
+  align-self: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px 10px;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.21);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-gradient.green,
+.btn-gradient-small.green {
+  background: rgba(130, 200, 160, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(130, 200, 160, 1) 0%,
+    rgba(130, 199, 158, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(130, 200, 160, 1)),
+    color-stop(100%, rgba(130, 199, 158, 1))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(130, 200, 160, 1) 0%,
+    rgba(130, 199, 158, 1) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(130, 200, 160, 1) 0%,
+    rgba(130, 199, 158, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(130, 200, 160, 1) 0%,
+    rgba(130, 199, 158, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(130, 200, 160, 1) 0%,
+    rgba(124, 185, 149, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82c8a0', endColorstr='#82c79e', GradientType=0 );
+}
+
+.btn-gradient.red,
+.btn-gradient-small.red {
+  background: rgba(250, 90, 90, 1);
+  background: -webkit-gradient(
+    linear,
+    0 0,
+    0 100%,
+    from(rgba(250, 90, 90, 1)),
+    to(rgba(232, 81, 81, 1))
+  );
+  background: -webkit-linear-gradient(
+    rgba(250, 90, 90, 1) 0%,
+    rgba(232, 81, 81, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    rgba(250, 90, 90, 1) 0%,
+    rgba(232, 81, 81, 1) 100%
+  );
+  background: -o-linear-gradient(
+    rgba(250, 90, 90, 1) 0%,
+    rgba(232, 81, 81, 1) 100%
+  );
+  background: linear-gradient(
+    rgba(250, 90, 90, 1) 0%,
+    rgba(232, 81, 81, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5a5a', endColorstr='#e85151', GradientType=0 );
+}
+
+.btn-gradient.green:active {
+  background: #72b08e;
+}
+
+.btn-gradient.red:active {
+  background: #e35252;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column; /* 수직 방향으로 정렬 */
+}
+
+.home-container a {
+  margin: 5px 0; /* 위 아래 여백 조절 */
+  text-decoration: none;
+  color: #ddd;
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.btn-3d {
+  position: relative;
+  display: inline-block;
+  font-size: 22px;
+  padding: 20px 60px;
+  color: white;
+  margin: 20px 10px 10px;
+  border-radius: 6px;
+  text-align: center;
+  transition: top 0.01s linear;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+.btn-3d-small {
+  position: relative;
+  display: inline-block;
+  padding: 5px 10px;
+  color: white;
+  margin: 20px 10px 10px;
+  border-radius: 6px;
+  text-align: center;
+  transition: top 0.01s linear;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-3d.blue:hover {
+  background-color: #699dd1;
+}
+.btn-3d:active {
+  top: 9px;
+}
+
+.btn-3d.blue {
+  background-color: #6da2d9;
+  box-shadow: 0 0 0 1px #6698cb inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 0 rgba(110, 164, 219, 0.7), 0 8px 0 1px rgba(0, 0, 0, 0.4),
+    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+.btn-3d.blue:active {
+  box-shadow: 0 0 0 1px #6191c2 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* 3D button colors */
+.btn-3d.red,
+.btn-3d-small.red {
+  background-color: #e74c3c;
+  box-shadow: 0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 0 #c24032, 0 8px 0 1px rgba(0, 0, 0, 0.4),
+    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+.btn-3d.red:active,
+.btn-3d.red-small:active {
+  box-shadow: 0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
 }

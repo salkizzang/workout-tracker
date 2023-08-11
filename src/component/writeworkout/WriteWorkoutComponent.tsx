@@ -48,7 +48,7 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
   const addSet = () => {
     const lastSet =
       sets.length > 0 ? sets[sets.length - 1] : { weight: 0, reps: 0 };
-    const newSet =  [...sets, { ...lastSet }];
+    const newSet = [...sets, { ...lastSet }];
     setSets(newSet);
     onDataChange(workout.id, workout.type, workout.name, newSet); // onDataChange 호출 추가
   };
@@ -56,22 +56,33 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
   const removeSet = (index: number) => {
     setSets(sets.filter((_, setIndex) => setIndex !== index));
   };
-return (
-  <div>
-    {workout && (
-      <div className="workout-card">
-        <div>
-          <label>{workout.name}</label>
-          <button onClick={addSet}>세트 추가</button>
-          <button onClick={() => onRemove(workout.id)}>Remove</button>
-        </div>
-        {sets.map((set, index) => (
-          <div key={index}>
-            <label>Set {index + 1}</label>
-              <a className="newBtn" onClick={() => removeSet(index)}>X</a>
+  return (
+    <div>
+      {workout && (
+        <div className='workout-card'>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <label>{workout.name}</label>
             <div>
+              <button className='btn-gradient-small green' onClick={addSet}>
+                세트 추가
+              </button>
+              <button
+                className='btn-gradient-small red'
+                onClick={() => onRemove(workout.id)}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+          {sets.map((set, index) => (
+            <div key={index}>
+              <label>Set {index + 1}</label>
+              <a className='btn-3d-small red' onClick={() => removeSet(index)}>
+                X
+              </a>
               <div>
-                <label>Weight:</label>
+                <div>
+                  <label>Weight:</label>
                   <button onClick={() => decrementWeight(index)}>-</button>
                   <input
                     type='number'
@@ -87,9 +98,9 @@ return (
                     }
                   />
                   <button onClick={() => incrementWeight(index)}>+</button>
-              </div>
-              <div>
-                <label>Reps:</label>
+                </div>
+                <div>
+                  <label>Reps:</label>
                   <button onClick={() => decrementReps(index)}>-</button>
                   <input
                     type='number'
@@ -105,15 +116,14 @@ return (
                     }
                   />
                   <button onClick={() => incrementReps(index)}>+</button>
+                </div>
               </div>
             </div>
-           
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-);
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default WriteWorkoutComponent;
