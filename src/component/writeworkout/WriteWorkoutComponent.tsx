@@ -81,11 +81,15 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
                 X
               </a>
               <div>
-                <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', width:'100%', alignItems:'center' }}>
+                  <div style={{width:'50%'}}>
                   <label>Weight:</label>
-                  <button onClick={() => decrementWeight(index)}>-</button>
+                  </div>
+                  <div style={{width:'50%'}}>
+                  <button className='btn-gradient-small red' style={{margin:'0 20px'}} onClick={() => decrementWeight(index)}>-</button>
                   <input
                     type='number'
+                    style={{margin:'0 20px'}}
                     value={set.weight}
                     onChange={(e) =>
                       setSets(
@@ -97,13 +101,18 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
                       )
                     }
                   />
-                  <button onClick={() => incrementWeight(index)}>+</button>
+                  <button className='btn-gradient-small green' style={{margin:'0 20px'}} onClick={() => incrementWeight(index)}>+</button>
+                  </div>
                 </div>
-                <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', width:'100%', alignItems:'center' }}>
+                  <div style={{width:'50%'}}>
                   <label>Reps:</label>
-                  <button onClick={() => decrementReps(index)}>-</button>
+                  </div>
+                  <div style={{width:'50%'}}>
+                  <button className='btn-gradient-small red' style={{margin:'0 20px'}} onClick={() => decrementReps(index)}>-</button>
                   <input
                     type='number'
+                    style={{margin:'0 20px'}}
                     value={set.reps}
                     onChange={(e) =>
                       setSets(
@@ -115,7 +124,8 @@ const WriteWorkoutComponent: React.FC<WriteWorkoutProps> = ({
                       )
                     }
                   />
-                  <button onClick={() => incrementReps(index)}>+</button>
+                  <button className='btn-gradient-small green' style={{margin:'0 20px'}} onClick={() => incrementReps(index)}>+</button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -274,6 +274,21 @@ code {
   transition: top 0.01s linear;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 }
+.btn-3d.green:hover  {background-color: #80C49D;}
+
+.btn-3d.green {
+  background-color: #82c8a0;
+  box-shadow: 0 0 0 1px #82c8a0 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 8px 0 0 rgba(126, 194, 155, .7),
+        0 8px 0 1px rgba(0,0,0,.4),
+        0 8px 8px 1px rgba(0,0,0,0.5);
+}
+.btn-3d.green:active {
+  box-shadow: 0 0 0 1px #82c8a0 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 0 0 1px rgba(0,0,0,0.4);
+}
 
 .btn-3d.blue:hover {
   background-color: #699dd1;
@@ -305,4 +320,23 @@ code {
 .btn-3d.red-small:active {
   box-shadow: 0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset,
     0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+
+input[type="number"] {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  text-align: center; /* 혹은 left, right 등 */
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input[type="number"]:focus {
+  border-color: #007BFF;
 }

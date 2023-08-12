@@ -243,7 +243,7 @@ function App() {
                       ))}
                       {selectedWorkouts.length > 0 && (
                         <Link to={process.env.PUBLIC_URL + '/results'}>
-                          <button onClick={saveWorkouts}>운동완료</button>
+                          <button className='btn-3d green' onClick={saveWorkouts}>운동완료</button>
                         </Link>
                       )}
                     </>
